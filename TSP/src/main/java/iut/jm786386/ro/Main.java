@@ -6,10 +6,12 @@
 package iut.jm786386.ro;
 
 import iut.jm786386.ro.algorithme.loader.TSPLoader;
+import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Closest;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +41,8 @@ public class Main {
             String path = 
                     "C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp";
             
-            new TSP_Closest().compute(TSPLoader.read(path), null);
+            List<INode> data = TSPLoader.read(path);
+            new TSP_Closest().compute(data, null);
         } catch (IOException e) {
             try {
                 String path = "C:\\Users\\jm786386\\Desktop\\villes.tsp";

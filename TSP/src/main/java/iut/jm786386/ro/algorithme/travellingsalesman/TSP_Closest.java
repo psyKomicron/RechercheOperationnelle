@@ -22,6 +22,7 @@ public class TSP_Closest implements Algorithm {
         ArrayList<INode> cities = new ArrayList();
         INode currentNode = start == null ? nodes.get(0) : start;
         cities.add(currentNode);
+        double totalDistance = 0;
         while (!cities.containsAll(nodes))
         {
             double delta = Double.MAX_VALUE;
@@ -41,7 +42,9 @@ public class TSP_Closest implements Algorithm {
                     + "\tNode " + Main.ANSI_GREEN + closestNode.getName() + Main.ANSI_RESET
                     + ", distance in-between : " + Main.ANSI_GREEN + delta + Main.ANSI_RESET);
             currentNode = closestNode;
+            totalDistance += delta;
         }
+        System.out.println("\tTotal distance : " + Main.ANSI_GREEN + totalDistance + Main.ANSI_RESET);
         return cities;
     }
     

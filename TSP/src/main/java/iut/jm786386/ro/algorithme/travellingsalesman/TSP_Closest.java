@@ -5,6 +5,7 @@
  */
 package iut.jm786386.ro.algorithme.travellingsalesman;
 
+import iut.jm786386.ro.Main;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import java.util.List;
 import iut.jm786386.ro.algorithme.Algorithm;
@@ -35,7 +36,10 @@ public class TSP_Closest implements Algorithm {
                 }
             }
             cities.add(closestNode);
-            System.out.println("Node " + currentNode.getName() + "\tNode " + closestNode.getName() + ", distance in-between : " + delta);
+            System.out.println(
+                    "Node " + Main.ANSI_GREEN + currentNode.getName() + Main.ANSI_RESET 
+                    + "\tNode " + Main.ANSI_GREEN + closestNode.getName() + Main.ANSI_RESET
+                    + ", distance in-between : " + Main.ANSI_GREEN + delta + Main.ANSI_RESET);
             currentNode = closestNode;
         }
         return cities;

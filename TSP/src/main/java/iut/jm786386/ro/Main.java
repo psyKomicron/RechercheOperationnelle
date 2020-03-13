@@ -38,8 +38,7 @@ public class Main {
         Instant t = Instant.now();
         // Put code here to get execution time
         try {
-            String path = 
-                    "C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp";
+            String path = "C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp";
             
             List<INode> data = TSPLoader.read(path);
             new TSP_Closest().compute(data, null);

@@ -15,8 +15,8 @@ public class Coordinate {
     
     public Coordinate(double x, double y)
     {
-        _longitude = y;
         _latitude = x;
+        _longitude = y;
     }
     
     public double getLongitude() { return _longitude; }
@@ -38,6 +38,6 @@ public class Coordinate {
     
     public String toString()
     {
-        return "latitude : " + _longitude + ", " + "longitude : " + _latitude;
+        return "(" + _longitude + ", " + _latitude + ")";
     }
 }

@@ -33,9 +33,10 @@ public class Coordinate {
                 Math.cos(phiA) * Math.cos(phiB) *
                 Math.sin(dLambda / 2) * Math.sin(dLambda / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return c * 6318137;
+        return c * 6371;
     }
     
+    @Override
     public String toString()
     {
         return "(" + _longitude + ", " + _latitude + ")";

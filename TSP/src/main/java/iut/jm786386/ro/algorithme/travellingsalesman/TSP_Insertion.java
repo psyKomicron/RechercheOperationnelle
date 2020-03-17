@@ -7,6 +7,7 @@ package iut.jm786386.ro.algorithme.travellingsalesman;
 
 import iut.jm786386.ro.algorithme.Algorithm;
 import iut.jm786386.ro.algorithme.nodes.INode;
+import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class TSP_Insertion implements Algorithm
 {
 
     @Override
-    public List<INode> compute(List<INode> nodes, INode start)
+    public Route compute(List<INode> nodes, INode start)
     {
         return null;
     }

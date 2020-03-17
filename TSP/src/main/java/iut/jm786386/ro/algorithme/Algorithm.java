@@ -7,6 +7,7 @@ package iut.jm786386.ro.algorithme;
 
 import java.util.List;
 import iut.jm786386.ro.algorithme.nodes.INode;
+import iut.jm786386.ro.algorithme.nodes.Route;
 
 /**
  *
@@ -14,6 +15,6 @@ import iut.jm786386.ro.algorithme.nodes.INode;
  */
 public interface Algorithm {
     
-    List<INode> compute(List<INode> nodes, INode start);
+    Route compute(List<INode> nodes, INode start);
     
 }

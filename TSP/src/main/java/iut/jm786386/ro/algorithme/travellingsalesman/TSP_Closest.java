@@ -5,20 +5,17 @@
  */
 package iut.jm786386.ro.algorithme.travellingsalesman;
 
-import iut.jm786386.ro.Main;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import java.util.List;
-import iut.jm786386.ro.algorithme.Algorithm;
-import iut.jm786386.ro.algorithme.gps.coordinate.Coordinate;
-import iut.jm786386.ro.algorithme.nodes.City;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.ArrayList;
+import iut.jm786386.ro.algorithme.IAlgorithm;
 
 /**
  *
  * @author MonsieurJ
  */
-public class TSP_Closest implements Algorithm {
+public class TSP_Closest implements IAlgorithm {
 
     @Override
     public Route compute(List<INode> nodes, INode start) {

@@ -41,7 +41,10 @@ public class Main {
         // Put code here to get execution time
         try {
             List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            
             Instant now = Instant.now();
+            
+            
             Route r = new TSP_Crescent().compute(data, null);
             Main.printExecutionTime(now, Instant.now());
             

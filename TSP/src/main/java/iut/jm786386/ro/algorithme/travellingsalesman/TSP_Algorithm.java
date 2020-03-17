@@ -6,7 +6,6 @@
 package iut.jm786386.ro.algorithme.travellingsalesman;
 
 import iut.jm786386.ro.algorithme.nodes.INode;
-import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.List;
 import iut.jm786386.ro.algorithme.IAlgorithm;
 
@@ -14,17 +13,9 @@ import iut.jm786386.ro.algorithme.IAlgorithm;
  *
  * @author MonsieurJ
  */
-public class TSP_Crescent implements IAlgorithm
+public abstract class TSP_Algorithm implements IAlgorithm
 {
-
-    @Override
-    public Route compute(List<INode> nodes, INode start)
-    {
-        INode node = start == null ? nodes.get(0) : start;
-        return new Route(nodes, computeDistance(nodes, node));
-    }
-
-    private double computeDistance(List<INode> nodes, INode start)
+    protected double computeDistance(List<INode> nodes, INode start)
     {
         double distance = 0.;
         INode currentNode = start;
@@ -36,5 +27,4 @@ public class TSP_Crescent implements IAlgorithm
         distance += currentNode.getValue().distanceTo(start.getValue());
         return distance;
     }
-    
 }

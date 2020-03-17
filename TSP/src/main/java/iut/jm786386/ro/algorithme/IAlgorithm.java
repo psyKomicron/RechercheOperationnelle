@@ -13,7 +13,7 @@ import iut.jm786386.ro.algorithme.nodes.Route;
  *
  * @author MonsieurJ
  */
-public interface Algorithm {
+public interface IAlgorithm {
     
     Route compute(List<INode> nodes, INode start);
     

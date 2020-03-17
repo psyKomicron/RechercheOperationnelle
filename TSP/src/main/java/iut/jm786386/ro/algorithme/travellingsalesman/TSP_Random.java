@@ -7,6 +7,7 @@ package iut.jm786386.ro.algorithme.travellingsalesman;
 
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
+import java.util.Collections;
 import java.util.List;
 import iut.jm786386.ro.algorithme.IAlgorithm;
 
@@ -14,13 +15,15 @@ import iut.jm786386.ro.algorithme.IAlgorithm;
  *
  * @author MonsieurJ
  */
-public class TSP_Insertion implements IAlgorithm
+public class TSP_Random extends TSP_Algorithm
 {
 
     @Override
     public Route compute(List<INode> nodes, INode start)
     {
-        return null;
+        List<INode> shuffled = nodes;
+        Collections.shuffle(shuffled);
+        return new Route(shuffled, computeDistance(nodes, start));
     }
     
 }

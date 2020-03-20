@@ -23,6 +23,12 @@ public class Coordinate {
     
     public double getLatitude() { return _latitude; }
     
+    /**
+     * Compute the distance between 2 coordinates in a spheric plan
+     * 
+     * @param coor
+     * @return 
+     */
     public double distanceTo(Coordinate coor)
     {
         double phiA = Math.toRadians(_latitude);

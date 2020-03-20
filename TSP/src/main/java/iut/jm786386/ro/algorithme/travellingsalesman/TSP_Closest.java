@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import iut.jm786386.ro.algorithme.IAlgorithm;
 
 /**
- *
+ * Class to create a round using the closest neighbor heuristic
  * @author MonsieurJ
  */
-public class TSP_Closest implements IAlgorithm {
+public class TSP_Closest extends TSP_Algorithm {
 
     @Override
     public Route compute(List<INode> nodes, INode start) {
@@ -41,7 +41,8 @@ public class TSP_Closest implements IAlgorithm {
             currentNode = closestNode;
             totalDistance += delta;
         }
-        return new Route(cities, totalDistance + currentNode.getValue().distanceTo(debut.getValue()));
+        cities.add(debut);
+        return new Route(cities, computeDistance(cities, null));
     }
     
 }

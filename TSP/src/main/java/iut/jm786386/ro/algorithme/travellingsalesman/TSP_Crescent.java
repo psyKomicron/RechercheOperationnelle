@@ -14,27 +14,13 @@ import iut.jm786386.ro.algorithme.IAlgorithm;
  *
  * @author MonsieurJ
  */
-public class TSP_Crescent implements IAlgorithm
+public class TSP_Crescent extends TSP_Algorithm
 {
 
     @Override
     public Route compute(List<INode> nodes, INode start)
     {
         INode node = start == null ? nodes.get(0) : start;
-        return new Route(nodes, computeDistance(nodes, node));
+        return new Route(nodes, super.computeDistance(nodes, node));
     }
-
-    private double computeDistance(List<INode> nodes, INode start)
-    {
-        double distance = 0.;
-        INode currentNode = start;
-        for (INode node : nodes)
-        {
-            distance += currentNode.getValue().distanceTo(node.getValue());
-            currentNode = node;
-        }
-        distance += currentNode.getValue().distanceTo(start.getValue());
-        return distance;
-    }
-    
 }

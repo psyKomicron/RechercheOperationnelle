@@ -14,14 +14,16 @@ import iut.jm786386.ro.algorithme.gps.coordinate.Coordinate;
 public interface INode {
 
     /**
-     *
-     * @return
+     * Returns the value of the node. Because we are currently dealing with cities
+     * the return value type is Coordinate.
+     * @return the value of the INode
      */
     Coordinate getValue();
      
     /**
-     *
-     * @return
+     * Returns the name of the node, can be empty or null
+     * @return the name of a string literal representing a name
+     * for the node.
      */
     String getName();
 }

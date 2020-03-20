@@ -18,7 +18,8 @@ public abstract class TSP_Algorithm implements IAlgorithm
     protected double computeDistance(List<INode> nodes, INode start)
     {
         double distance = 0.;
-        INode currentNode = start;
+        INode currentNode = start == null ? nodes.get(0) : start;
+        start = currentNode;
         for (INode node : nodes)
         {
             distance += currentNode.getValue().distanceTo(node.getValue());

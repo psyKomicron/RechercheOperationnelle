@@ -27,6 +27,11 @@ public class TSPLoader {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] splitedLine = line.split(" ");
+                if (splitedLine[1].contains(",") || splitedLine[2].contains(","))
+                {
+                    splitedLine[1] = splitedLine[1].replace(",", ".");
+                    splitedLine[2] = splitedLine[2].replace(",", ".");
+                }
                 double lat = Double.valueOf(splitedLine[1]);
                 double lon = Double.valueOf(splitedLine[2]);
                 cities.add(new City(new Coordinate(lat, lon), splitedLine[0]));

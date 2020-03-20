@@ -11,6 +11,7 @@ import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Closest;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Crescent;
+import iut.jm786386.ro.algorithme.travellingsalesman.TSP_LocalSearch;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
@@ -40,20 +41,27 @@ public class Main {
         System.out.println("Traveling Salesman Problem");
         // Put code here to get execution time
         try {
-            List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
+            // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
             
             Instant now = Instant.now();
             
-            
-            Route r = new TSP_Crescent().compute(data, null);
+            Route crescent = new TSP_Crescent().compute(data, null);
             Main.printExecutionTime(now, Instant.now());
+            System.out.println(Main.printGreen("TSP crescent : ") + crescent.toString());
             
             now = Instant.now();
-            Route r2 = new TSP_Closest().compute(data, null);
-            Main.printExecutionTime(now, Instant.now());
             
-            System.out.println(Main.printGreen("TSP crescent : ") + r.toString());
-            System.out.println(Main.printGreen("TSP closest : ") + r2.toString());
+            Route closest = new TSP_Closest().compute(data, null);
+            Main.printExecutionTime(now, Instant.now());
+            System.out.println(Main.printGreen("TSP closest : ") + closest.toString());
+            
+            now = Instant.now();
+            
+            Route localSearch = new TSP_LocalSearch().compute(closest.getNodes(), null);
+            Main.printExecutionTime(now, Instant.now());
+            System.out.println(Main.printGreen("TSP local search : ") + localSearch.toString());
         } 
         catch (IOException e) {
             try {
@@ -88,6 +96,6 @@ public class Main {
     
     public static void printExecutionTime(Instant past, Instant now)
     {
-        System.out.println("Execution time : " + Duration.between(past, now).toMillis() + "ms");
+        System.out.println("\nExecution time : " + Duration.between(past, now).toMillis() + "ms");
     }
 }

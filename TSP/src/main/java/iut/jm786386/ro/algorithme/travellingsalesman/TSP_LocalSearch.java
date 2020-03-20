@@ -28,18 +28,13 @@ public class TSP_LocalSearch extends TSP_Algorithm {
             ArrayList<INode> temp = new ArrayList(currentRoute);
             for (int i = 0; i < currentRoute.size(); i++) 
             {
-                ArrayList<INode> neighborRoute = new ArrayList(currentRoute);
+                ArrayList<INode> neighborRoute = new ArrayList(temp);
                 if ((i + 1) == currentRoute.size())
-                {
                     Collections.swap(neighborRoute, i, 0);
-                }
-                else {
+                else
                     Collections.swap(neighborRoute, i, i + 1);
-                }
                 if (computeDistance(neighborRoute, null) < computeDistance(currentRoute, null))
-                {
                     currentRoute = neighborRoute;
-                }
             }
             end = currentRoute.equals(temp);
         }

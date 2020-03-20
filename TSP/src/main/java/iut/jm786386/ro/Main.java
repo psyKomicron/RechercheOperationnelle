@@ -43,7 +43,7 @@ public class Main {
         try {
             // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
             // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
-            List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
+            List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
             
             Instant now = Instant.now();
             
@@ -56,12 +56,18 @@ public class Main {
             Route closest = new TSP_Closest().compute(data, null);
             Main.printExecutionTime(now, Instant.now());
             System.out.println(Main.printGreen("TSP closest : ") + closest.toString());
+            closest.getNodes().forEach(v -> {
+                System.out.println(v.getName());
+            });
             
             now = Instant.now();
             
             Route localSearch = new TSP_LocalSearch().compute(closest.getNodes(), null);
             Main.printExecutionTime(now, Instant.now());
             System.out.println(Main.printGreen("TSP local search : ") + localSearch.toString());
+            localSearch.getNodes().forEach(v -> {
+                System.out.println(v.getName());
+            });
         } 
         catch (IOException e) {
             try {
@@ -71,7 +77,6 @@ public class Main {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
-        // End
     }
     
     public static String printRed(String s)

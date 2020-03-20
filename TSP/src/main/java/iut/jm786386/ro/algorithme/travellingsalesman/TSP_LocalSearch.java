@@ -5,11 +5,9 @@
  */
 package iut.jm786386.ro.algorithme.travellingsalesman;
 
-import iut.jm786386.ro.algorithme.IAlgorithm;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,5 +37,10 @@ public class TSP_LocalSearch extends TSP_Algorithm {
             end = currentRoute.equals(temp);
         }
         return new Route(currentRoute, computeDistance(currentRoute, null));
+    }
+
+    @Override
+    public String getName() {
+        return "TSP_LocalSearch";
     }
 }

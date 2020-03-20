@@ -5,6 +5,8 @@
  */
 package iut.jm786386.ro;
 
+import iut.jm786386.ro.algorithme.IAlgorithm;
+import iut.jm786386.ro.algorithme.threading.Launcher;
 import iut.jm786386.ro.algorithme.loader.TSPLoader;
 import iut.jm786386.ro.algorithme.nodes.City;
 import iut.jm786386.ro.algorithme.nodes.INode;
@@ -12,9 +14,12 @@ import iut.jm786386.ro.algorithme.nodes.Route;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Closest;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Crescent;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_LocalSearch;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_ClosestLocalSearch;
+import iut.jm786386.ro.algorithme.threading.colorconsole.Printer;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,15 +29,6 @@ import java.util.logging.Logger;
  * @author MonsieurJ
  */
 public class Main {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\033[1;31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
     /**
      * @param args the command line arguments
@@ -44,18 +40,30 @@ public class Main {
             // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
             // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
             List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            ArrayList<IAlgorithm> algos = new ArrayList();
+            // add algorithms to compute here
+            algos.add(new TSP_Crescent());
+            algos.add(new TSP_Closest());
+            algos.add(new TSP_ClosestLocalSearch());
+            
+            Launcher l = new Launcher(algos, data);
+            l.launch();
+            while (!(Printer.getEntries() >= 3)) { System.out.println(Printer.getEntries() >= 3);}
+            Printer.free();
+            System.out.println("end");
+            /*
             
             Instant now = Instant.now();
             
             Route crescent = new TSP_Crescent().compute(data, null);
-            Main.printExecutionTime(now, Instant.now());
-            System.out.println(Main.printGreen("TSP crescent : ") + crescent.toString());
+            Printer.printExecutionTime(now, Instant.now());
+            System.out.println(Printer.printGreen("TSP crescent : ") + crescent.toString());
             
             now = Instant.now();
             
             Route closest = new TSP_Closest().compute(data, null);
-            Main.printExecutionTime(now, Instant.now());
-            System.out.println(Main.printGreen("TSP closest : ") + closest.toString());
+            Printer.printExecutionTime(now, Instant.now());
+            System.out.println(Printer.printGreen("TSP closest : ") + closest.toString());
             closest.getNodes().forEach(v -> {
                 System.out.println(v.getName());
             });
@@ -63,44 +71,15 @@ public class Main {
             now = Instant.now();
             
             Route localSearch = new TSP_LocalSearch().compute(closest.getNodes(), null);
-            Main.printExecutionTime(now, Instant.now());
-            System.out.println(Main.printGreen("TSP local search : ") + localSearch.toString());
+            Printer.printExecutionTime(now, Instant.now());
+            System.out.println(Printer.printGreen("TSP local search : ") + localSearch.toString());
             localSearch.getNodes().forEach(v -> {
                 System.out.println(v.getName());
             });
-        } 
-        catch (IOException e) {
-            try {
-                String path = "C:\\Users\\jm786386\\Desktop\\villes.tsp";
-                new TSP_Closest().compute(TSPLoader.read(path), null);
-            } catch (IOException ex1) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+        } */
+        }   
+        catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public static String printRed(String s)
-    {
-        return Main.ANSI_RED + s + Main.ANSI_RESET;
-    }
-    
-    public static String printGreen(String s)
-    {
-        return Main.ANSI_GREEN + s + Main.ANSI_RESET;
-    }
-    
-    public static String printBlue(String s)
-    {
-        return Main.ANSI_BLUE + s + Main.ANSI_RESET;
-    }
-    
-    public static String printColor(String s, String color)
-    {
-        return color + s + Main.ANSI_RESET;
-    }
-    
-    public static void printExecutionTime(Instant past, Instant now)
-    {
-        System.out.println("\nExecution time : " + Duration.between(past, now).toMillis() + "ms");
     }
 }

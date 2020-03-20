@@ -44,10 +44,10 @@ public class TSP_Closest extends TSP_Algorithm {
         cities.add(debut);
         return new Route(cities, computeDistance(cities, null));
     }
+
+    @Override
+    public String getName() {
+        return "TSP_Closest";
+    }
     
 }
-
-//            System.out.println(
-//                    "Node " + Main.ANSI_GREEN + currentNode.getName() + Main.ANSI_RESET 
-//                    + "\tNode " + Main.ANSI_GREEN + closestNode.getName() + Main.ANSI_RESET
-//                    + ", distance in-between : " + Main.ANSI_GREEN + delta + Main.ANSI_RESET);

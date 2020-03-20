@@ -25,5 +25,10 @@ public class TSP_Random extends TSP_Algorithm
         Collections.shuffle(shuffled);
         return new Route(shuffled, computeDistance(nodes, start));
     }
+
+    @Override
+    public String getName() {
+        return "TSP_Random";
+    }
     
 }

@@ -8,8 +8,6 @@ package iut.jm786386.ro.algorithme.travellingsalesman;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.List;
-import iut.jm786386.ro.algorithme.IAlgorithm;
-
 /**
  *
  * @author MonsieurJ
@@ -22,5 +20,10 @@ public class TSP_Crescent extends TSP_Algorithm
     {
         INode node = start == null ? nodes.get(0) : start;
         return new Route(nodes, super.computeDistance(nodes, node));
+    }
+
+    @Override
+    public String getName() {
+        return "TSP_Crescent";
     }
 }

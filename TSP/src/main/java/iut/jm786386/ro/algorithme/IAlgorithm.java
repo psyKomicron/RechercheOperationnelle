@@ -17,4 +17,5 @@ public interface IAlgorithm {
     
     Route compute(List<INode> nodes, INode start);
     
+    String getName();
 }

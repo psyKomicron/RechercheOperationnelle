@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package iut.jm786386.ro.algorithme.loader;
+package iut.jm786386.ro.algorithme.fal;
 
 import iut.jm786386.ro.algorithme.gps.coordinate.Coordinate;
 import iut.jm786386.ro.algorithme.nodes.City;

@@ -6,7 +6,7 @@
 package iut.jm786386.ro.algorithme.threading;
 
 import iut.jm786386.ro.algorithme.IAlgorithm;
-import iut.jm786386.ro.algorithme.loader.TSPLoader;
+import iut.jm786386.ro.algorithme.fal.TSPLoader;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import iut.jm786386.ro.algorithme.threading.colorconsole.Printer;
@@ -56,8 +56,7 @@ public class Launcher {
                         Instant now = Instant.now();
                         Route route = a.compute(_nodes, null);
                         Instant d = Instant.now();
-                        Printer.print(Printer.printGreen(a.getName()) + route.toString() + "\n" +
-                                Printer.printExecutionTime(now, d));
+                        Printer.print(a, a.getName() + route.toString() + Printer.printExecutionTime(now, d), route.getNodes());
                     }
                 }).start();
             }

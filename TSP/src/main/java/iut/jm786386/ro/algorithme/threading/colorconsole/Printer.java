@@ -5,16 +5,20 @@
  */
 package iut.jm786386.ro.algorithme.threading.colorconsole;
 
+import iut.jm786386.ro.algorithme.IAlgorithm;
+import iut.jm786386.ro.algorithme.fal.TSPWriter;
+import iut.jm786386.ro.algorithme.nodes.INode;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author MonsieurJ
  */
 public class Printer {
-    private static ArrayList<String> _buffer = new ArrayList();
+    private static HashMap<IAlgorithm, String> _buffer = new HashMap();
     
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -28,16 +32,24 @@ public class Printer {
     
     public static int getEntries() { return _buffer.size(); }
     
+    public static String getEntry(IAlgorithm key)
+    {
+        return _buffer.get(key);
+    }
+    
     public static void free()
     {
-        _buffer.forEach(s -> {
-            System.out.println(s);
+        _buffer.forEach((a, s) -> 
+        {
+            System.out.println(a + ", " + s);
         });
     }
     
-    public static void print(String s)
+    public static void print(IAlgorithm a, String s, List<INode> nodes)
     {
-        _buffer.add(s);
+        _buffer.put(a, s);
+        
+        new TSPWriter().write(s + printNodes(nodes), a.getName());
     }
     
     public static String printRed(String s)
@@ -63,5 +75,15 @@ public class Printer {
     public static String printExecutionTime(Instant past, Instant now)
     {
         return "\nExecution time : " + Duration.between(past, now).toMillis() + "ms";
+    }
+    
+    private static String printNodes(List<INode> list)
+    {
+        String nodes = "\n";
+        for (INode node : list)
+        {
+            nodes += node.getName() + "\n";
+        }
+        return nodes;
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author MonsieurJ
  */
-public class TSP_LocalSearch extends TSP_Algorithm {
+public class TSP_LS_SWAPALL extends TSP_Algorithm {
 
     @Override
     public Route compute(List<INode> nodes, INode start) {
@@ -26,13 +26,13 @@ public class TSP_LocalSearch extends TSP_Algorithm {
             ArrayList<INode> temp = new ArrayList(currentRoute);
             for (int i = 0; i < currentRoute.size(); i++) 
             {
-                ArrayList<INode> neighborRoute = new ArrayList(temp);
-                if ((i + 1) == currentRoute.size())
-                    Collections.swap(neighborRoute, i, 0);
-                else
-                    Collections.swap(neighborRoute, i, i + 1);
-                if (computeDistance(neighborRoute, null) < computeDistance(currentRoute, null))
-                    currentRoute = neighborRoute;
+                for (int j = i; j < currentRoute.size(); j++) 
+                {
+                    ArrayList<INode> neighborRoute = new ArrayList(temp);
+                    Collections.swap(neighborRoute, i, j);
+                    if (computeDistance(neighborRoute, null) < computeDistance(currentRoute, null))
+                        currentRoute = neighborRoute;
+                }
             }
             end = currentRoute.equals(temp);
         }
@@ -41,6 +41,12 @@ public class TSP_LocalSearch extends TSP_Algorithm {
 
     @Override
     public String getName() {
-        return "TSP_LocalSearch";
+        return "tsp_localsearch";
     }
+
+    @Override
+    public String getDescription() {
+        return "local search using non-consecutive swapping";
+    }
+    
 }

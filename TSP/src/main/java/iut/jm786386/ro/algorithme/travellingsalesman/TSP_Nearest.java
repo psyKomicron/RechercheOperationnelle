@@ -15,7 +15,7 @@ import iut.jm786386.ro.algorithme.IAlgorithm;
  * Class to create a round using the closest neighbor heuristic
  * @author MonsieurJ
  */
-public class TSP_Closest extends TSP_Algorithm {
+public class TSP_Nearest extends TSP_Algorithm {
 
     @Override
     public Route compute(List<INode> nodes, INode start) {
@@ -23,7 +23,6 @@ public class TSP_Closest extends TSP_Algorithm {
         INode currentNode = start == null ? nodes.get(0) : start;
         INode debut = currentNode;
         cities.add(currentNode);
-        double totalDistance = 0;
         while (!cities.containsAll(nodes))
         {
             double delta = Double.MAX_VALUE;
@@ -39,7 +38,6 @@ public class TSP_Closest extends TSP_Algorithm {
             }
             cities.add(closestNode);
             currentNode = closestNode;
-            totalDistance += delta;
         }
         cities.add(debut);
         return new Route(cities, computeDistance(cities, null));
@@ -47,7 +45,12 @@ public class TSP_Closest extends TSP_Algorithm {
 
     @Override
     public String getName() {
-        return "TSP_Closest";
+        return "tsp_nearestneighbor";
+    }
+
+    @Override
+    public String getDescription() {
+        return "nearest neighbor";
     }
     
 }

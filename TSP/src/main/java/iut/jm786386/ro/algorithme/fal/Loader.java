@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author MonsieurJ
  */
-public class TSPLoader {
+public class Loader {
     public static List<INode> read(String filePath) throws FileNotFoundException, IOException
     {
         ArrayList<INode> cities = new ArrayList();

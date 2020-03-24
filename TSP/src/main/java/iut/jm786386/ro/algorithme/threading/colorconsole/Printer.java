@@ -6,7 +6,7 @@
 package iut.jm786386.ro.algorithme.threading.colorconsole;
 
 import iut.jm786386.ro.algorithme.IAlgorithm;
-import iut.jm786386.ro.algorithme.fal.TSPWriter;
+import iut.jm786386.ro.algorithme.fal.Writer;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import java.time.Duration;
 import java.time.Instant;
@@ -20,6 +20,7 @@ import java.util.List;
 public class Printer {
     private static HashMap<IAlgorithm, String> _buffer = new HashMap();
     
+    public static final String LN_BRK = "\n";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\033[1;31m";
@@ -30,7 +31,10 @@ public class Printer {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
     
-    public static int getEntries() { return _buffer.size(); }
+    public static int getEntries() 
+    { 
+        return _buffer.size(); 
+    }
     
     public static String getEntry(IAlgorithm key)
     {
@@ -39,17 +43,13 @@ public class Printer {
     
     public static void free()
     {
-        _buffer.forEach((a, s) -> 
-        {
-            System.out.println(a + ", " + s);
-        });
+        _buffer.forEach((a, s) -> System.out.println(a + ", " + s));
     }
     
     public static void print(IAlgorithm a, String s, List<INode> nodes)
     {
-        _buffer.put(a, s);
-        
-        new TSPWriter().write(s + printNodes(nodes), a.getName());
+        _buffer.put(a, s + LN_BRK);
+        new Writer().write(s + printNodes(nodes), a.getName());
     }
     
     public static String printRed(String s)
@@ -74,15 +74,15 @@ public class Printer {
     
     public static String printExecutionTime(Instant past, Instant now)
     {
-        return "\nExecution time : " + Duration.between(past, now).toMillis() + "ms";
+        return LN_BRK + "Execution time : " + Duration.between(past, now).toMillis() + "ms";
     }
     
     private static String printNodes(List<INode> list)
     {
-        String nodes = "\n";
+        String nodes = LN_BRK;
         for (INode node : list)
         {
-            nodes += node.getName() + "\n";
+            nodes += node.getName() + LN_BRK;
         }
         return nodes;
     }

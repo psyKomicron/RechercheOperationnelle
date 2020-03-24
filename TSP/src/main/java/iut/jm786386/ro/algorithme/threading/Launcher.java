@@ -6,7 +6,7 @@
 package iut.jm786386.ro.algorithme.threading;
 
 import iut.jm786386.ro.algorithme.IAlgorithm;
-import iut.jm786386.ro.algorithme.fal.TSPLoader;
+import iut.jm786386.ro.algorithme.fal.Loader;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import iut.jm786386.ro.algorithme.threading.colorconsole.Printer;
@@ -28,7 +28,7 @@ public class Launcher {
     {
         _algorithms = algos;
         try {
-            _nodes = TSPLoader.read(filePath);
+            _nodes = Loader.read(filePath);
         } catch (IOException ex) {
             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,34 +42,25 @@ public class Launcher {
     
     public void launch()
     {
-        if (_algorithms.size() == 1)
-        {
-            start(0);
-        }
+        if (_algorithms.size() == 1) start(0);
         else if (_algorithms.size() < 256)
         {
-            for (IAlgorithm a : _algorithms)
-            {
-                new Thread(new Runnable() {
-                    public void run()
-                    {
-                        Instant now = Instant.now();
-                        Route route = a.compute(_nodes, null);
-                        Instant d = Instant.now();
-                        Printer.print(a, a.getName() + route.toString() + Printer.printExecutionTime(now, d), route.getNodes());
-                    }
+            _algorithms.forEach((a) -> {
+                new Thread(() -> {
+                    Instant now = Instant.now();
+                    Route route = a.compute(_nodes, null);
+                    Instant d = Instant.now();
+                    Printer.print(a, a.getDescription()+ Printer.LN_BRK + route.toString() + Printer.printExecutionTime(now, d), route.getNodes());
                 }).start();
-            }
+            });
         }
+        else throw new UnknownError("Not enough threads to start all algorithm in parallel");
     }
     
     public void launch(IAlgorithm a)
     {
-        new Thread(new Runnable() {
-            public void run()
-            {
+        new Thread(() -> {
                 a.compute(_nodes, null);
-            }
         }).start();
     }
     

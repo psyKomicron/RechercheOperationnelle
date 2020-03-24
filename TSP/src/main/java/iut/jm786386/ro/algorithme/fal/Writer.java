@@ -5,7 +5,6 @@
  */
 package iut.jm786386.ro.algorithme.fal;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,11 +15,11 @@ import javax.swing.filechooser.FileSystemView;
  *
  * @author MonsieurJ
  */
-public class TSPWriter {
+public class Writer {
     private final String _directory;
     private FileWriter _file;
     
-    public TSPWriter()
+    public Writer()
     {
         _directory = getUserLibDirectory() + "\\";
     }
@@ -44,7 +43,7 @@ public class TSPWriter {
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(TSPWriter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

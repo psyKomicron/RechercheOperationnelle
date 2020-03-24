@@ -7,12 +7,14 @@ package iut.jm786386.ro;
 
 import iut.jm786386.ro.algorithme.IAlgorithm;
 import iut.jm786386.ro.algorithme.threading.Launcher;
-import iut.jm786386.ro.algorithme.fal.TSPLoader;
-import iut.jm786386.ro.algorithme.fal.TSPWriter;
+import iut.jm786386.ro.algorithme.fal.Loader;
 import iut.jm786386.ro.algorithme.nodes.INode;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Closest;
+import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Nearest;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Crescent;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_ClosestLocalSearch;
+import iut.jm786386.ro.algorithme.travellingsalesman.TSP_LS_SWAPALL;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_2OPT;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_LS_SWAP;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_LS_SWAPALL;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,20 +33,26 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Traveling Salesman Problem");
         try {
-            // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes_nom.txt");
-            // TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
-            List<INode> data = TSPLoader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
-            ArrayList<IAlgorithm> algos = new ArrayList();
-            // add algorithms to compute here
-            algos.add(new TSP_Crescent());
-            algos.add(new TSP_Closest());
-            algos.add(new TSP_ClosestLocalSearch());
-            
+            List<INode> data = Loader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            ArrayList<IAlgorithm> algos = fill();
             Launcher l = new Launcher(algos, data);
             l.launch();
-        }   
+        }
         catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static ArrayList<IAlgorithm> fill()
+    {
+        ArrayList<IAlgorithm> algos = new ArrayList();
+        /*--------------------------------------------*/
+        //algos.add(new TSP_Crescent());
+        //algos.add(new TSP_Nearest());
+        algos.add(new TSP_Nearest_LS_SWAP());
+        algos.add(new TSP_Nearest_LS_SWAPALL());
+        algos.add(new TSP_Nearest_2OPT());
+        /*--------------------------------------------*/
+        return algos;
     }
 }

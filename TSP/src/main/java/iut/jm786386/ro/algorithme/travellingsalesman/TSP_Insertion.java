@@ -25,7 +25,12 @@ public class TSP_Insertion implements IAlgorithm
 
     @Override
     public String getName() {
-        return "TSP_Insertion";
+        return "tsp_insertion";
+    }
+
+    @Override
+    public String getDescription() {
+        return "insertion method";
     }
     
 }

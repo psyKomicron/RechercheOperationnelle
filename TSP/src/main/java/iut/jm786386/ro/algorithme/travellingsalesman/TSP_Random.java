@@ -9,7 +9,6 @@ import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.Collections;
 import java.util.List;
-import iut.jm786386.ro.algorithme.IAlgorithm;
 
 /**
  *
@@ -28,7 +27,12 @@ public class TSP_Random extends TSP_Algorithm
 
     @Override
     public String getName() {
-        return "TSP_Random";
+        return "tsp_random";
+    }
+
+    @Override
+    public String getDescription() {
+        return "random";
     }
     
 }

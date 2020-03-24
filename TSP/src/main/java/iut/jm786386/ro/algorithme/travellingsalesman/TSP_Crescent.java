@@ -24,6 +24,11 @@ public class TSP_Crescent extends TSP_Algorithm
 
     @Override
     public String getName() {
-        return "TSP_Crescent";
+        return "tsp_crescent";
+    }
+
+    @Override
+    public String getDescription() {
+        return "trivial resolving method (return the same nodes)";
     }
 }

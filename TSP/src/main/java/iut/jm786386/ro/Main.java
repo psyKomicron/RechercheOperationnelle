@@ -5,16 +5,18 @@
  */
 package iut.jm786386.ro;
 
-import iut.jm786386.ro.algorithme.IAlgorithm;
-import iut.jm786386.ro.algorithme.threading.Launcher;
-import iut.jm786386.ro.algorithme.fal.Loader;
-import iut.jm786386.ro.algorithme.nodes.INode;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Nearest;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Crescent;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_NCS;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_2OPT;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_CS;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_NCS;
+import iut.jm786386.ro.tp.IAlgorithm;
+import iut.jm786386.ro.tp.threading.Launcher;
+import iut.jm786386.ro.tp.fal.Loader;
+import iut.jm786386.ro.tp.nodes.INode;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_2OPT;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Nearest;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Crescent;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_NCS;
+import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_Generic;
+import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_2OPT;
+import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_CS;
+import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_NCS;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class Main {
         //algos.add(new TSP_Nearest_NCS());
         algos.add(new TSP_Nearest_CS());
         algos.add(new TSP_Nearest_2OPT());
+        algos.add(new TSP_Generic(new TSP_2OPT(), new TSP_NCS()));
         /*--------------------------------------------*/
         return algos;
     }

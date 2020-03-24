@@ -7,25 +7,28 @@ package iut.jm786386.ro.algorithme.travellingsalesman.composed;
 
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Algorithm;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_LS_SWAPALL;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Nearest;
+import iut.jm786386.ro.algorithme.travellingsalesman.TSP_NCS;
 import java.util.List;
 
 /**
  *
  * @author MonsieurJ
  */
-public class TSP_Nearest_LS_SWAPALL extends TSP_Algorithm {
+public class TSP_Nearest_NCS extends TSP_LocalSearch {
 
+    public TSP_Nearest_NCS()
+    {
+        super(new TSP_NCS(), new TSP_NCS());
+    }
+    
     @Override
     public Route compute(List<INode> nodes, INode start) {
-        return new TSP_LS_SWAPALL().compute(new TSP_Nearest().compute(nodes, start).getNodes(), start);
+        return super.compute(nodes, start);
     }
 
     @Override
     public String getName() {
-        return "tsp_nearestswap_all";
+        return "tsp_nonconsecutive_swap";   
     }
 
     @Override

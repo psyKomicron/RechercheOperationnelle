@@ -11,10 +11,10 @@ import iut.jm786386.ro.algorithme.fal.Loader;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Nearest;
 import iut.jm786386.ro.algorithme.travellingsalesman.TSP_Crescent;
-import iut.jm786386.ro.algorithme.travellingsalesman.TSP_LS_SWAPALL;
+import iut.jm786386.ro.algorithme.travellingsalesman.TSP_NCS;
 import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_2OPT;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_LS_SWAP;
-import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_LS_SWAPALL;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_CS;
+import iut.jm786386.ro.algorithme.travellingsalesman.composed.TSP_Nearest_NCS;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +49,8 @@ public class Main {
         /*--------------------------------------------*/
         //algos.add(new TSP_Crescent());
         //algos.add(new TSP_Nearest());
-        algos.add(new TSP_Nearest_LS_SWAP());
-        algos.add(new TSP_Nearest_LS_SWAPALL());
+        //algos.add(new TSP_Nearest_NCS());
+        algos.add(new TSP_Nearest_CS());
         algos.add(new TSP_Nearest_2OPT());
         /*--------------------------------------------*/
         return algos;

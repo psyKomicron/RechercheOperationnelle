@@ -10,6 +10,7 @@ import iut.jm786386.ro.algorithme.fal.Loader;
 import iut.jm786386.ro.algorithme.nodes.INode;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import iut.jm786386.ro.algorithme.threading.colorconsole.Printer;
+import iut.jm786386.ro.algorithme.travellingsalesman.checker.NodeChecker;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
@@ -50,7 +51,12 @@ public class Launcher {
                     Instant now = Instant.now();
                     Route route = a.compute(_nodes, null);
                     Instant d = Instant.now();
-                    Printer.print(a, a.getDescription()+ Printer.LN_BRK + route.toString() + Printer.printExecutionTime(now, d), route.getNodes());
+                    NodeChecker checker = new NodeChecker(_nodes);
+                    Printer.print(a, 
+                            a.getDescription()+Printer.LN_BRK+route.toString()+Printer.printExecutionTime(now, d)+Printer.LN_BRK+"Contains all nodes : "+checker.check(route.getNodes()), 
+                            route.getNodes());
+                    
+                    System.out.println(a.getName() + " ended, results in file");
                 }).start();
             });
         }

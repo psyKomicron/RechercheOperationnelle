@@ -23,23 +23,28 @@ public class TSP_2OPT extends TSP_Algorithm {
         boolean end = false;
         while (!end)
         {
-            ArrayList<INode> temp = new ArrayList(currentRoute);
-            for (int i = 0; i < currentRoute.size(); i++) 
+            end = true;
+            for (int i = 0; i < currentRoute.size() - 1; i++) 
             {
-                for (int j = i + 1; j < currentRoute.size(); j++) 
+                for (int j = 0; j < currentRoute.size() - 1; j++) 
                 {
-                    ArrayList<INode> neighborRoute = new ArrayList(currentRoute);
-                    Collections.swap(neighborRoute, i, j);
-                    if (computeDistance(currentRoute, null) > computeDistance(neighborRoute, null))
+                    if ( (j != i-1) && (j != i) && (j != i+1) )
                     {
-                        currentRoute = neighborRoute;
+                        double d1 = currentRoute.get(i).distanceTo(currentRoute.get(i + 1)) + currentRoute.get(j).distanceTo(currentRoute.get(j + 1));
+                        double d2 = currentRoute.get(i).distanceTo(currentRoute.get(j)) + currentRoute.get(i + 1).distanceTo(currentRoute.get(j + 1));
+                        if (d1 > d2)
+                        {
+                            end = false;
+                            Collections.swap(currentRoute, i + 1, j);
+                        }
                     }
                 }
             }
-            end = currentRoute.equals(temp);
         }
         return new Route(currentRoute, computeDistance(currentRoute, null));
     }
+    
+    
 
     @Override
     public String getName() {

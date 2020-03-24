@@ -31,21 +31,6 @@ public class Printer {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
     
-    public static int getEntries() 
-    { 
-        return _buffer.size(); 
-    }
-    
-    public static String getEntry(IAlgorithm key)
-    {
-        return _buffer.get(key);
-    }
-    
-    public static void free()
-    {
-        _buffer.forEach((a, s) -> System.out.println(a + ", " + s));
-    }
-    
     public static void print(IAlgorithm a, String s, List<INode> nodes)
     {
         _buffer.put(a, s + LN_BRK);
@@ -82,7 +67,7 @@ public class Printer {
         String nodes = LN_BRK;
         for (INode node : list)
         {
-            nodes += node.getName() + LN_BRK;
+            nodes += node.toString()+ LN_BRK;
         }
         return nodes;
     }

@@ -9,7 +9,6 @@ import iut.jm786386.ro.algorithme.nodes.INode;
 import java.util.List;
 import iut.jm786386.ro.algorithme.nodes.Route;
 import java.util.ArrayList;
-import iut.jm786386.ro.algorithme.IAlgorithm;
 
 /**
  * Class to create a round using the closest neighbor heuristic
@@ -21,7 +20,6 @@ public class TSP_Nearest extends TSP_Algorithm {
     public Route compute(List<INode> nodes, INode start) {
         ArrayList<INode> cities = new ArrayList();
         INode currentNode = start == null ? nodes.get(0) : start;
-        INode debut = currentNode;
         cities.add(currentNode);
         while (!cities.containsAll(nodes))
         {
@@ -39,7 +37,6 @@ public class TSP_Nearest extends TSP_Algorithm {
             cities.add(closestNode);
             currentNode = closestNode;
         }
-        cities.add(debut);
         return new Route(cities, computeDistance(cities, null));
     }
 

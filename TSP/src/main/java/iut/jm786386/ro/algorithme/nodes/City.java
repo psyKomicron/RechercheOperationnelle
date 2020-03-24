@@ -31,4 +31,9 @@ public class City implements INode {
     {
         return _name + "\t" + _coor.toString();
     }
+
+    @Override
+    public double distanceTo(INode node) {
+        return getValue().distanceTo(node.getValue());
+    }
 }

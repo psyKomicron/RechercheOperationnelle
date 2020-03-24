@@ -26,4 +26,11 @@ public interface INode {
      * for the node.
      */
     String getName();
+    
+    /**
+     * Calculate the theoretical distance between 2 nodes (real distance or cost).
+     * @param node 
+     * @return the distance cost
+     */
+    double distanceTo(INode node);
 }

@@ -30,7 +30,7 @@ public class TSP_Generic extends TSP_LocalSearch {
         String desc = null;
         try
         {
-            desc = getF().getDescription() + iut.jm786386.ro.tp.threading.colorconsole.Printer.LN_BRK + getG().getDescription();
+            desc = getF().getDescription() + iut.jm786386.ro.tp.threading.printer.Printer.LN_BRK + getG().getDescription();
         }
         catch (UnsupportedOperationException e)
         {

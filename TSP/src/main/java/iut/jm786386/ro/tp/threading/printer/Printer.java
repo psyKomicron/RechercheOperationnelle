@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package iut.jm786386.ro.tp.threading.colorconsole;
+package iut.jm786386.ro.tp.threading.printer;
 
 import iut.jm786386.ro.tp.IAlgorithm;
 import iut.jm786386.ro.tp.fal.Writer;
@@ -20,16 +20,16 @@ import java.util.List;
 public class Printer {
     private static HashMap<IAlgorithm, String> _buffer = new HashMap();
     
-    public static final String LN_BRK = "\n";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\033[1;31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String LN_BRK = System.lineSeparator();
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_BLACK = "\u001B[30m";
+    private static final String ANSI_RED = "\033[1;31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
+    private static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_WHITE = "\u001B[37m";
     
     public static void print(IAlgorithm a, String s, List<INode> nodes)
     {

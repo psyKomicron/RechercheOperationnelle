@@ -5,23 +5,20 @@
  */
 package iut.jm786386.ro;
 
+import java.util.List;
+
 import iut.jm786386.ro.tp.IAlgorithm;
-import iut.jm786386.ro.tp.threading.Launcher;
-import iut.jm786386.ro.tp.fal.Loader;
+import iut.jm786386.ro.tp.fal.resultcomparer.ResultsReader;
+import iut.jm786386.ro.tp.fal.TSPReader;
+import iut.jm786386.ro.tp.fal.Writer;
 import iut.jm786386.ro.tp.nodes.INode;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_2OPT;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Nearest;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Crescent;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_NCS;
+import iut.jm786386.ro.tp.threading.Launcher;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.*;
 import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_Generic;
 import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_2OPT;
 import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_CS;
-import iut.jm786386.ro.tp.travellingsalesman.composed.specific.TSP_Nearest_NCS;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.FileNotFoundException;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -34,20 +31,32 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Traveling Salesman Problem");
+        /*
         try {
-            List<INode> data = Loader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
-            ArrayList<IAlgorithm> algos = fill();
+            List<INode> data = TSPReader.read("C:\\Users\\julie\\Desktop\\Cloud\\GitHub\\RechercheOperationnelle\\villes.tsp");
+            List<IAlgorithm> algos = fill();
             Launcher l = new Launcher(algos, data);
             l.launch();
         }
-        catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        catch (java.io.IOException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        */
+        System.out.println("Computing results");
+        try
+        {
+            ResultsReader reader = new ResultsReader(Writer.getUserLibDirectory());
+            System.out.println(reader.compareResults());
+        }
+        catch (FileNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, "tsp res files not found :(", ex);
         }
     }
     
-    public static ArrayList<IAlgorithm> fill()
+    public static List<IAlgorithm> fill()
     {
-        ArrayList<IAlgorithm> algos = new ArrayList();
+        List<IAlgorithm> algos = new java.util.ArrayList();
         /*--------------------------------------------*/
         //algos.add(new TSP_Crescent());
         //algos.add(new TSP_Nearest());

@@ -47,7 +47,7 @@ public class Writer {
         }
     }
     
-    private String getUserLibDirectory()
+    public static String getUserLibDirectory()
     {
         return FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
     }

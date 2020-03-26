@@ -6,10 +6,10 @@
 package iut.jm786386.ro.tp.threading;
 
 import iut.jm786386.ro.tp.IAlgorithm;
-import iut.jm786386.ro.tp.fal.Loader;
+import iut.jm786386.ro.tp.fal.TSPReader;
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
-import iut.jm786386.ro.tp.threading.colorconsole.Printer;
+import iut.jm786386.ro.tp.threading.printer.Printer;
 import iut.jm786386.ro.tp.travellingsalesman.checker.NodeChecker;
 import java.io.IOException;
 import java.time.Instant;
@@ -29,7 +29,7 @@ public class Launcher {
     {
         _algorithms = algos;
         try {
-            _nodes = Loader.read(filePath);
+            _nodes = TSPReader.read(filePath);
         } catch (IOException ex) {
             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,8 +52,11 @@ public class Launcher {
                     Route route = a.compute(_nodes, null);
                     Instant d = Instant.now();
                     NodeChecker checker = new NodeChecker(_nodes);
-                    Printer.print(a, 
-                            a.getDescription()+Printer.LN_BRK+route.toString()+Printer.printExecutionTime(now, d)+Printer.LN_BRK+"Contains all nodes : "+checker.check(route.getNodes()), 
+                    Printer.print(a,
+                            a.getDescription()+Printer.LN_BRK+
+                            route.toString()+" " +a.getClass().getCanonicalName()+Printer.LN_BRK+
+                            Printer.printExecutionTime(now, d)+Printer.LN_BRK+
+                            "Contains all nodes : "+checker.check(route.getNodes()), 
                             route.getNodes());
                     
                     System.out.println(a.getName() + " ended, results in file");

@@ -16,10 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Reads a .tsp file or a .txt file (formatted as a .tsp file) and
+ * load values as coordinates and names.
  * @author MonsieurJ
  */
 public class TSPReader {
+    /**
+     * Reads the specified file and return an ArrayList made of the
+     * values (city name & coordinates) stored in the file.
+     * @param filePath system path to the file
+     * @return the values stored in the file as an ArrayList of City
+     * @throws FileNotFoundException exception thrown by an bad acess to the
+     * file system
+     * @throws IOException 
+     */
     public static List<INode> read(String filePath) throws FileNotFoundException, IOException
     {
         ArrayList<INode> cities = new ArrayList();

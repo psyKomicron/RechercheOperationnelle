@@ -43,10 +43,15 @@ public class Writer {
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Writer.class.getName()).log(Level.SEVERE, "Writer failed", ex);
         }
     }
     
+    /**
+     * Returns a string representation of the path to the current
+     * user's home (home under Unix OS & Documents under Windows).
+     * @return Returns a string representation of the path to the user's home
+     */
     public static String getUserLibDirectory()
     {
         return FileSystemView.getFileSystemView().getDefaultDirectory().getPath();

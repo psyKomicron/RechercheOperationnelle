@@ -40,6 +40,7 @@ public class Coordinate {
                 Math.sin(dLambda / 2) * Math.sin(dLambda / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return c * 6371;
+        //return Math.sqrt( Math.pow(coor._latitude-this._latitude, 2) + Math.pow(coor._longitude - this._longitude, 2)) * 100;
     }
     
     @Override

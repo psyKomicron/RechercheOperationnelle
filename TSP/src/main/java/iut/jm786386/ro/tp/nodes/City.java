@@ -6,6 +6,7 @@
 package iut.jm786386.ro.tp.nodes;
 
 import iut.jm786386.ro.tp.gps.coordinate.Coordinate;
+import java.util.List;
 
 /**
  *
@@ -25,7 +26,7 @@ public class City implements INode {
     public Coordinate getValue() { return _coor; }
     
     @Override
-    public String getName() { return _name; }
+    public String getKey() { return _name; }
     
     public String toString()
     {
@@ -35,5 +36,10 @@ public class City implements INode {
     @Override
     public double distanceTo(INode node) {
         return getValue().distanceTo(node.getValue());
+    }
+
+    @Override
+    public void swapInBetween(List<INode> nodes, int index1, int index2) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

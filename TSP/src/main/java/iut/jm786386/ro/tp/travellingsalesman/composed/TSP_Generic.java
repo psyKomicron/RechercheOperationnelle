@@ -34,7 +34,7 @@ public class TSP_Generic extends TSP_LocalSearch {
         }
         catch (UnsupportedOperationException e)
         {
-            Logger.getLogger(TSP_Generic.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(TSP_Generic.class.getName()).log(Level.SEVERE, "Algo name or description not implemented", e);
             desc = "tsp_generic";
         }
         return desc;

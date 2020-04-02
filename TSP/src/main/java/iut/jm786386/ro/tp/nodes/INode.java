@@ -6,6 +6,7 @@
 package iut.jm786386.ro.tp.nodes;
 
 import iut.jm786386.ro.tp.gps.coordinate.Coordinate;
+import java.util.List;
 
 /**
  *
@@ -25,7 +26,7 @@ public interface INode {
      * @return the name of a string literal representing a name
      * for the node.
      */
-    String getName();
+    String getKey();
     
     /**
      * Calculate the theoretical distance between 2 nodes (real distance or cost).
@@ -33,4 +34,13 @@ public interface INode {
      * @return the distance cost
      */
     double distanceTo(INode node);
+    
+    /**
+     * Swap the node at index1 with node at index2, and every node in between
+     * the two
+     * @param nodes
+     * @param index1
+     * @param index2 
+     */
+    void swapInBetween(List<INode> nodes, int index1, int index2);
 }

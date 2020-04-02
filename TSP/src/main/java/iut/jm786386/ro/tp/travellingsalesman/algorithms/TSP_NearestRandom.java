@@ -9,18 +9,19 @@ import iut.jm786386.ro.tp.nodes.INode;
 import java.util.List;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.travellingsalesman.TSP_Algorithm;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 /**
  * Class to create a round using the closest neighbor heuristic
  * @author MonsieurJ
  */
-public class TSP_Nearest extends TSP_Algorithm {
+public class TSP_NearestRandom extends TSP_Algorithm {
 
     @Override
     public Route compute(List<INode> nodes, INode start) {
         ArrayList<INode> cities = new ArrayList();
-        INode currentNode = start == null ? nodes.get(0) : start;
+        INode currentNode = start == null ? nodes.get(new SecureRandom().nextInt(60)) : start;
         cities.add(currentNode);
         while (!cities.containsAll(nodes))
         {

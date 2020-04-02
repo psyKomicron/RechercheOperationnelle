@@ -36,7 +36,8 @@ public class TSP_2OPT extends TSP_Algorithm {
                         if (d1 > d2)
                         {
                             end = false;
-                            Collections.swap(currentRoute, i + 1, j);
+                            // currentRoute = swap(currentRoute, i+1, j);
+                            Collections.swap(currentRoute, i+1, j);
                         }
                     }
                 }
@@ -45,7 +46,38 @@ public class TSP_2OPT extends TSP_Algorithm {
         return new Route(currentRoute, computeDistance(currentRoute, null));
     }
     
-    
+    /**
+     * Swap elements at index i and j and all elements in between.
+     * Basically it reverse the path from i->j
+     * @param nodes values
+     * @param i first index
+     * @param j second index
+     * @return the arrayList with the elements swapped
+     */
+    public ArrayList<INode> swap(ArrayList<INode> nodes, int i, int j)
+    {
+        ArrayList<INode> copy = new ArrayList(nodes);
+        INode element = copy.get(i);
+        INode element2 = copy.get(j);
+        copy.set(j, element);
+        copy.set(i, element2);
+        if (i+1!=j)
+        {
+            int i2 = Math.min(i, j)+1;
+            int j2 = Math.max(i, j)-1;
+            for (; i2 < j2; ++i2, --j2)
+            {
+                if (i2!=j2)
+                {
+                    INode s1 = copy.get(i2);
+                    INode s2 = copy.get(j2);
+                    copy.set(i2, s2);
+                    copy.set(j2, s1);
+                }
+            }
+        }
+        return copy;
+    }
 
     @Override
     public String getName() {

@@ -70,11 +70,23 @@ public class Launcher {
     {
         new Thread(() -> {
                 a.compute(_nodes, null);
+                Instant now = Instant.now();
+                    Route route = a.compute(_nodes, null);
+                    Instant d = Instant.now();
+                    NodeChecker checker = new NodeChecker(_nodes);
+                    Printer.print(a,
+                            a.getDescription()+Printer.LN_BRK+
+                            route.toString()+" " +a.getClass().getCanonicalName()+Printer.LN_BRK+
+                            Printer.printExecutionTime(now, d)+Printer.LN_BRK+
+                            "Contains all nodes : "+checker.check(route.getNodes()), 
+                            route.getNodes());
+                    
+                    System.out.println(a.getName() + " ended, results in file");
         }).start();
     }
     
     private void start(int index)
     {
-        _algorithms.get(index).compute(_nodes, null);
+        launch(_algorithms.get(index));
     }
 }

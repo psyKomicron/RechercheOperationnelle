@@ -7,7 +7,7 @@ package iut.jm786386.ro.tp.travellingsalesman.composed.specific;
 
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Nearest;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_NearestRandom;
 import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_CS;
 import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_LocalSearch;
 import java.util.List;
@@ -20,7 +20,7 @@ public class TSP_Nearest_CS extends TSP_LocalSearch {
     
     public TSP_Nearest_CS()
     {
-        super(new TSP_CS(), new TSP_Nearest());
+        super(new TSP_CS(), new TSP_NearestRandom());
     }
     
     @Override

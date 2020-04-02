@@ -9,7 +9,6 @@ import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.travellingsalesman.TSP_Algorithm;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,19 +24,19 @@ public class TSP_2OPT extends TSP_Algorithm {
         while (!end)
         {
             end = true;
-            for (int i = 0; i < currentRoute.size() - 1; i++) 
+            double bestDist = computeDistance(currentRoute, null);
+            for (int i = 0; i < nodes.size(); i++) 
             {
-                for (int j = 0; j < currentRoute.size() - 1; j++) 
+                for (int j = 0; j < nodes.size(); j++) 
                 {
-                    if ( (j != i-1) && (j != i) && (j != i+1) )
+                    if (j!=i-1 && j!=i && j!=i+1)
                     {
-                        double d1 = currentRoute.get(i).distanceTo(currentRoute.get(i + 1)) + currentRoute.get(j).distanceTo(currentRoute.get(j + 1));
-                        double d2 = currentRoute.get(i).distanceTo(currentRoute.get(j)) + currentRoute.get(i + 1).distanceTo(currentRoute.get(j + 1));
-                        if (d1 > d2)
+                        ArrayList<INode> newRoute = swap(currentRoute, i, j);
+                        double newDist = computeDistance(newRoute, null);
+                        if (newDist < bestDist)
                         {
                             end = false;
-                            // currentRoute = swap(currentRoute, i+1, j);
-                            Collections.swap(currentRoute, i+1, j);
+                            currentRoute = newRoute;
                         }
                     }
                 }

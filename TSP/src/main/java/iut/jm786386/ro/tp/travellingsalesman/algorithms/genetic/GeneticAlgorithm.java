@@ -5,6 +5,7 @@
  */
 package iut.jm786386.ro.tp.travellingsalesman.algorithms.genetic;
 
+import iut.jm786386.ro.tp.IAlgorithm;
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.travellingsalesman.TSP_Algorithm;
@@ -21,9 +22,15 @@ import java.util.List;
  * @author MonsieurJ
  */
 public class GeneticAlgorithm extends TSP_Algorithm {
-    private SecureRandom _generator = new SecureRandom();
     private int _bound = 0;
-
+    private int _popSize = 800;
+    private int _maxGen = 100;
+    private int _parentNum = 100;
+    
+    private SecureRandom _generator = new SecureRandom();
+    
+    private IAlgorithm _algo;
+    
     @Override
     public String getName() {
         return GeneticAlgorithm.class.getName();

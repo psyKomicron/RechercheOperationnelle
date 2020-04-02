@@ -11,7 +11,7 @@ import iut.jm786386.ro.tp.nodes.Route;
 import java.util.List;
 
 /**
- *
+ * Super classe pour les algos de recherche locale
  * @author MonsieurJ
  */
 public abstract class TSP_LocalSearch implements IAlgorithm {

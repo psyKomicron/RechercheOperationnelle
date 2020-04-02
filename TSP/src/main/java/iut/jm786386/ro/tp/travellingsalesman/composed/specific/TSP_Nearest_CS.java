@@ -13,7 +13,8 @@ import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_LocalSearch;
 import java.util.List;
 
 /**
- *
+ * Calcule une recherche locale avec swap consecutif et algo du plus
+ * proche voisin avec choix du noeud de depart aleatoire.
  * @author MonsieurJ
  */
 public class TSP_Nearest_CS extends TSP_LocalSearch {

@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Calcule f(g) si f et g sont les algorithmes.
  * @author MonsieurJ
  */
 public class TSP_Generic extends TSP_LocalSearch {

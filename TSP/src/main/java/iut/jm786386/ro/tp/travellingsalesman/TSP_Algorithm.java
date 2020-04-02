@@ -10,7 +10,9 @@ import java.util.List;
 import iut.jm786386.ro.tp.IAlgorithm;
 
 /**
- *
+ * Super classe pour les algorithmes du voyageur.
+ * Est utilisee principalement pour la fonction 
+ * computeDistance
  * @author MonsieurJ
  */
 public abstract class TSP_Algorithm implements IAlgorithm

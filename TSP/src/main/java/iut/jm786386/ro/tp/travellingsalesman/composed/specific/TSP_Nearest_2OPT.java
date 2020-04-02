@@ -13,7 +13,8 @@ import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_LocalSearch;
 import java.util.List;
 
 /**
- *
+ * Calcule une recherche locale avec 2OPT et algo du plus
+ * proche voisin
  * @author MonsieurJ
  */
 public class TSP_Nearest_2OPT extends TSP_LocalSearch {

@@ -7,6 +7,7 @@ package iut.jm786386.ro.tp.threading;
 
 import iut.jm786386.ro.tp.IAlgorithm;
 import iut.jm786386.ro.tp.fal.TSPReader;
+import iut.jm786386.ro.tp.fal.Writer;
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.threading.printer.Printer;
@@ -43,6 +44,7 @@ public class Launcher {
     
     public void launch()
     {
+        System.out.println(Printer.printRed("Writing in : ") + Writer.getUserLibDirectory());
         if (_algorithms.size() == 1) start(0);
         else if (_algorithms.size() < 256)
         {

@@ -8,18 +8,20 @@ package iut.jm786386.ro.tp.travellingsalesman.composed.specific;
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_NCS;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Nearest;
 import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_LocalSearch;
 import java.util.List;
 
 /**
- *
+ * Recherche locale avec swap non-consecutif et algo du plus
+ * proche voisin
  * @author MonsieurJ
  */
 public class TSP_Nearest_NCS extends TSP_LocalSearch {
 
     public TSP_Nearest_NCS()
     {
-        super(new TSP_NCS(), new TSP_NCS());
+        super(new TSP_NCS(), new TSP_Nearest());
     }
     
     @Override

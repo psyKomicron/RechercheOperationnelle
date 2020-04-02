@@ -9,13 +9,13 @@ import iut.jm786386.ro.tp.IAlgorithm;
 import iut.jm786386.ro.tp.nodes.INode;
 import iut.jm786386.ro.tp.nodes.Route;
 import iut.jm786386.ro.tp.travellingsalesman.TSP_Algorithm;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_2OPT;
 import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_NearestRandom;
-import iut.jm786386.ro.tp.travellingsalesman.algorithms.TSP_Random;
-import iut.jm786386.ro.tp.travellingsalesman.composed.TSP_Generic;
+import iut.jm786386.ro.tp.travellingsalesman.algorithms.genetic.comparator.RouteComparator;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  *
@@ -45,52 +45,58 @@ public class GeneticAlgorithm extends TSP_Algorithm {
     public Route compute(List<INode> nodes, INode start) {
         _bound = nodes.size();
         // point de depart a null pour random le choix
-        ArrayList<INode> currentGen = (ArrayList) new TSP_NearestRandom().compute(nodes, null).getNodes();
-        int r = 3600;
-        while (r > 0)
-        {
-            int nParents = rand();
-            ArrayList<INode> parents = select(currentGen, nParents);
-            ArrayList<INode> children = new ArrayList();
-            // faire des enfants
-            for (int i = 0; i < nParents; i++) {
-                INode[] honeyMoon = cross(currentGen.get(rand()), currentGen.get(rand()));
-                children.add(honeyMoon[0]);
-                children.add(honeyMoon[1]);
-            }
-            int y;
-            while ((y = rand()) >= nParents){// generer un random inferieur strictement a nParents
-            }
-            // muter les enfants de y a N
-            mutate(children, y);
-            // choisir les candidats de la gen suivante
-            ArrayList<INode> oldgen = new ArrayList(parents); // oldGen = children + parents
-            oldgen.addAll(children);
-            ArrayList<INode> newgen = new ArrayList(); // collection pour les meilleurs sujets
-            for (int i = 0; i < nParents; i++) {
-                INode e = null;
-                double fitness = 0.;
-                for (INode iNode : oldgen)
-                    if (fitness(iNode) > fitness)
-                        e = iNode;
-                newgen.add(e);
-            }
-            currentGen = newgen;
-            --r;
+        PriorityQueue<Route> queue = new PriorityQueue(new RouteComparator());
+        for (int n = 0; n < _parentNum; n++) {
+            queue.add(new TSP_NearestRandom().compute(nodes, null));
         }
-        return new Route(currentGen, computeDistance(currentGen, null));
+        int repetition = 0;
+        while (repetition < _maxGen)
+        {
+            ArrayList<Route> parents = new ArrayList();
+            // choix des parents -> OK
+            for (int i = 0; i < _parentNum/2; i++)
+                parents.add(queue.poll());
+            ArrayList<Route> temp = new ArrayList();
+            for (int i = 0; i < _parentNum/2; i++)
+                temp.add(queue.poll());
+            Collections.shuffle(temp);
+            parents.addAll(temp);
+            
+            // croisement de touts les parents
+            int j = parents.size()-1;
+            int i = 0;
+            ArrayList<Route> children = new ArrayList();
+            for (; i<parents.size() && j > i; i++, j--)
+            {
+                ArrayList<Route> routes = cross(parents.get(i), parents.get(j), rand());
+                children.add(routes.get(0));
+                children.add(routes.get(1));
+            }
+            
+            ++repetition;
+        }
+        return new Route(nodes, computeDistance(nodes, start));
     }
     
-    private ArrayList<INode> select(ArrayList<INode> nodes, int n)
+    private ArrayList<Route> select(ArrayList<Route> nodes, int n)
     {
         // TODO here
         return null;
     }
     
-    private INode[] cross(INode father, INode mother)
+    private ArrayList<Route> cross(Route father, Route mother, int crosspoint)
     {
-        // TODO here
-        return null;
+        ArrayList<INode> fArray = (ArrayList) father.getNodes();
+        ArrayList<INode> mArray = (ArrayList) mother.getNodes();
+        for (int i=crosspoint; i < mArray.size()-crosspoint; i++)
+        {
+            INode res = fArray.set(i, mArray.get(i));
+            mArray.set(i, res);
+        }
+        ArrayList<Route> routes = new ArrayList();
+        routes.add(new Route(fArray, computeDistance(fArray, null)));
+        routes.add(new Route(mArray, computeDistance(mArray, null)));
+        return routes;
     }
     
     /**
@@ -99,24 +105,19 @@ public class GeneticAlgorithm extends TSP_Algorithm {
      * @param children
      * @return 
      */
-    private ArrayList<INode> mutate(ArrayList<INode> children, int y)
+    private ArrayList<Route> mutate(ArrayList<Route> children, int y)
     {
-        TSP_Generic ls = new TSP_Generic(new TSP_Random(), new TSP_2OPT());
-        ArrayList<INode> chosenChildren = new ArrayList();
-        for (int i = y; i < children.size(); i++) {
-            chosenChildren.add(children.get(i));
-        }
-        ArrayList<INode> mutatedChilren = (ArrayList<INode>) ls.compute(chosenChildren, null).getNodes();
-        return mutatedChilren;
+        // TODO
+        return null;
     }
     
-    private INode birth(INode parent)
+    private Route birth(Route parent)
     {
         // TODO here
         return null;
     }
     
-    private double fitness(INode node)
+    private double fitness(Route node)
     {
         // TODO here
         return _generator.nextDouble();
